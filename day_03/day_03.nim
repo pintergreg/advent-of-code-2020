@@ -1,8 +1,15 @@
 var trees = 0
-var pos = -3
+let right = 1
+let down = 2
+
+var pos = -right
+var k = -1
 for line in lines "input":
+    k += 1
+    if k mod down != 0:
+        continue
     let width = len(line)
-    pos += 3
+    pos += right
     if pos >= width:
         pos = pos-width
     echo line[pos]
