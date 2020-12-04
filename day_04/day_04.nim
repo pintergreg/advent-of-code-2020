@@ -1,23 +1,17 @@
 import strutils
-import sets
+import sequtils
+import tables
 
 const passport_fields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
 var valid = 0
-var invalid = 0
-var missing = toHashSet(passport_fields)
-var empty = 0
+var found = initTable[string, string]()
 for line in readFile("input").split("\n"):
-    for field in line.strip.split(" "):
-        missing.excl(field.split(":")[0])
-
     if line.strip == "":
-        empty += 1
-        if len(missing) == 0:
+        if passport_fields.allIt(toSeq(found.keys).contains(it)):
             valid += 1
-        else:
-            invalid += 1
-        missing = toHashSet(passport_fields)
+        found.clear
+        continue
+    for field in line.strip.split(" "):
+        found[field.split(":")[0]] = field.split(":")[1]
 
 echo valid
-echo invalid
-echo empty
