@@ -1,5 +1,7 @@
 import strutils
 import parseutils
+import sets
+import sequtils
 
 proc decode(s: string, h: string, l: string): int =
     var temp: string
@@ -21,3 +23,11 @@ for line in lines "input":
     if id > max:
         max = id
 echo max
+
+# from 64 because the LSB cannot be 1, thus 8*8 seat doen't exist
+var seats = toHashSet(toSeq(64..max))
+for line in lines "input":
+    let id = calc_id(line)
+    seats.excl(id)
+
+echo seats
