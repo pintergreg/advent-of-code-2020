@@ -1,5 +1,4 @@
 import unittest
-import sequtils
 include day_05
 
 # BFFFBBFRRR: row 70, column 7, seat ID 567.
