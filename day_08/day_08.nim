@@ -14,6 +14,8 @@ while true:
         echo "AGAIN"
         break
     # echo program[i]
+    if i == len(program):
+        break
     let instruction = program[i].split(" ")[0]
     let parameter = parseInt(program[i].split(" ")[1])
     if instruction == "nop":
