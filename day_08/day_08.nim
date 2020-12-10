@@ -31,3 +31,26 @@ proc executeProgram(program: seq[string]): (int, bool) =
     return (acc, terminated)
 
 echo executeProgram(program)
+
+# try to change any nop to jmp or vice versa one by one, but only one at a time
+# then execute the program, if it terminates, the wrong one has been found
+var tried = newSeq[int](0)
+for i in 1..len(program):
+    var changed = false
+    var fixed = newSeq[string](0)
+    for k, i in program:
+        var new_i = i
+        if not changed and k notin tried:
+            if i[0..2] == "nop":
+                new_i = "jmp$#" % i[3..^1]
+                changed = true
+                tried.add(k)
+            if i[0..2] == "jmp":
+                new_i = "nop$#" % i[3..^1]
+                changed = true
+                tried.add(k)
+        fixed.add(new_i)
+    let r = executeProgram(fixed)
+    if r[1]:
+        echo r
+        break
