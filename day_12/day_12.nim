@@ -61,7 +61,6 @@ for line in lines "input":
 echo "part1: $#" % $(abs(east)+abs(north))
 
 var waypoint = {"east": 10, "north": 1}.toTable
-
 facing = Facing.East
 east = 0
 north = 0
@@ -102,4 +101,4 @@ for line in lines "input":
         waypoint["north"] -= value
     # echo (east, north, facing, waypoint)
 
-echo "part1: $#" % $(abs(east)+abs(north))
+echo "part2: $#" % $(abs(east)+abs(north))
