@@ -68,19 +68,8 @@ north = 0
 for line in lines "input":
     let value = parseInt(line[1..^1])
     if line.startsWith('F'):
-        case facing:
-            of Facing.North:
-                north += waypoint["north"] * value
-                east += waypoint["east"] * value
-            of Facing.East:
-                north += waypoint["north"] * value
-                east += waypoint["east"] * value
-            of Facing.South:
-                north += waypoint["north"] * value
-                east += waypoint["east"] * value
-            of Facing.West:
-                north += waypoint["north"] * value
-                east += waypoint["east"] * value
+        north += waypoint["north"] * value
+        east += waypoint["east"] * value
     if line.startsWith('R'):
         for i in 0..((value /% 90) mod 4)-1:
             if facing != Facing.West:
